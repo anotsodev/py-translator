@@ -2,8 +2,10 @@
 Simple interactive translator that uses the google translate api.
 
 Requirements:
-	1. requests
- 	2. urllib
+```
+pip install requests
+pip install urllib
+```
   
 ```
 $ python py-translate.py
