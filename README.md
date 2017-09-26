@@ -13,28 +13,137 @@ $ python py-translate.py
 
 Interactive Python Translator
 
-Actions:
+Available Commands:
 (1) Translate
 (2) Quit
 
-What do you want to do?: 1
+Please select a command to perform: 1
 
-Enter the word(s) that you need to translate: i love you
+Enter the word(s) that you need to translate: i want some cookies
 
 Enter the SOURCE language (Default = auto - Type 'list' to list all the languages):
 
 Source Language: auto
 
+Enter the TARGET language (Type 'list' to list all the languages): list
+Languages:
+auto - Automatic
+af - Afrikaans
+sq - Albanian
+am - Amharic
+ar - Arabic
+hy - Armenian
+az - Azerbaijani
+eu - Basque
+be - Belarusian
+bn - Bengali
+bs - Bosnian
+bg - Bulgarian
+ca - Catalan
+ceb - Cebuano
+ny - Chichewa
+zh-cn - Chinese Simplified
+zh-tw - Chinese Traditional
+co - Corsican
+hr - Croatian
+cs - Czech
+da - Danish
+nl - Dutch
+en - English
+eo - Esperanto
+et - Estonian
+tl - Filipino
+fi - Finnish
+fr - French
+fy - Frisian
+gl - Galician
+ka - Georgian
+de - German
+el - Greek
+gu - Gujarati
+ht - Haitian Creole
+ha - Hausa
+haw - Hawaiian
+iw - Hebrew
+hi - Hindi
+hmn - Hmong
+hu - Hungarian
+is - Icelandic
+ig - Igbo
+id - Indonesian
+ga - Irish
+it - Italian
+ja - Japanese
+jw - Javanese
+kn - Kannada
+kk - Kazakh
+km - Khmer
+ko - Korean
+ku - Kurdish (Kurmanji)
+ky - Kyrgyz
+lo - Lao
+la - Latin
+lv - Latvian
+lt - Lithuanian
+lb - Luxembourgish
+mk - Macedonian
+mg - Malagasy
+ms - Malay
+ml - Malayalam
+mt - Maltese
+mi - Maori
+mr - Marathi
+mn - Mongolian
+my - Myanmar (Burmese)
+ne - Nepali
+no - Norwegian
+ps - Pashto
+fa - Persian
+pl - Polish
+pt - Portuguese
+ma - Punjabi
+ro - Romanian
+ru - Russian
+sm - Samoan
+gd - Scots Gaelic
+sr - Serbian
+st - Sesotho
+sn - Shona
+sd - Sindhi
+si - Sinhala
+sk - Slovak
+sl - Slovenian
+so - Somali
+es - Spanish
+su - Sundanese
+sw - Swahili
+sv - Swedish
+tg - Tajik
+ta - Tamil
+te - Telugu
+th - Thai
+tr - Turkish
+uk - Ukrainian
+ur - Urdu
+uz - Uzbek
+vi - Vietnamese
+cy - Welsh
+xh - Xhosa
+yi - Yiddish
+yo - Yoruba
+zu - Zulu
+
 Enter the TARGET language (Type 'list' to list all the languages): fr
 
 Target Language: fr
 
-Original Word(s) (auto): i love you
-Translated Word(s) (fr): je t'aime
+Original Word(s) (auto): i want some cookies
+Translated Word(s) (fr): je veux des cookies
 
-Actions:
+Available Commands:
 (1) Translate
 (2) Quit
 
-What do you want to do?: 2
+Please select a command to perform: 2
+Program is quitting...
 ```
