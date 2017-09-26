@@ -6,6 +6,7 @@ Requirements:
 pip install requests
 pip install urllib
 ```
+Example Usage:
   
 ```
 $ python py-translate.py
