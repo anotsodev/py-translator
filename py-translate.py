@@ -14,165 +14,64 @@
 import requests
 import urllib
 import sys
+import json
 
 langs = [
     'auto','af','sq','am','ar','hy','az','eu','be','bn','bs','bg','ca','ceb','ny','zh-cn','zh-tw','co','hr','cs','da','nl','en','eo','et','tl','fi','fr','fy','gl','ka','de','el','gu','ht','ha','haw','iw','hi','hmn','hu','is','ig','id','ga','it','ja','jw','kn','kk','km','ko','ku','ky','lo','la','lv','lt','lb','mk','mg','ms','ml','mt','mi','mr','mn','my','ne','no','ps','fa','pl','pt','ma','ro','ru','sm','gd','sr','st','sn','sd','si','sk','sl','so','es','su','sw','sv','tg','ta','te','th','tr','uk','ur','uz','vi','cy','xh','yi','yo','zu'
 ]
 
 def print_langs():
-	print("\
-'auto': 'Automatic'\n\
-'af': 'Afrikaans'\n\
-'sq': 'Albanian'\n\
-'am': 'Amharic'\n\
-'ar': 'Arabic'\n\
-'hy': 'Armenian'\n\
-'az': 'Azerbaijani'\n\
-'eu': 'Basque'\n\
-'be': 'Belarusian'\n\
-'bn': 'Bengali'\n\
-'bs': 'Bosnian'\n\
-'bg': 'Bulgarian'\n\
-'ca': 'Catalan'\n\
-'ceb': 'Cebuano'\n\
-'ny': 'Chichewa'\n\
-'zh-cn': 'Chinese Simplified'\n\
-'zh-tw': 'Chinese Traditional'\n\
-'co': 'Corsican'\n\
-'hr': 'Croatian'\n\
-'cs': 'Czech'\n\
-'da': 'Danish'\n\
-'nl': 'Dutch'\n\
-'en': 'English'\n\
-'eo': 'Esperanto'\n\
-'et': 'Estonian'\n\
-'tl': 'Filipino'\n\
-'fi': 'Finnish'\n\
-'fr': 'French'\n\
-'fy': 'Frisian'\n\
-'gl': 'Galician'\n\
-'ka': 'Georgian'\n\
-'de': 'German'\n\
-'el': 'Greek'\n\
-'gu': 'Gujarati'\n\
-'ht': 'Haitian Creole'\n\
-'ha': 'Hausa'\n\
-'haw': 'Hawaiian'\n\
-'iw': 'Hebrew'\n\
-'hi': 'Hindi'\n\
-'hmn': 'Hmong'\n\
-'hu': 'Hungarian'\n\
-'is': 'Icelandic'\n\
-'ig': 'Igbo'\n\
-'id': 'Indonesian'\n\
-'ga': 'Irish'\n\
-'it': 'Italian'\n\
-'ja': 'Japanese'\n\
-'jw': 'Javanese'\n\
-'kn': 'Kannada'\n\
-'kk': 'Kazakh'\n\
-'km': 'Khmer'\n\
-'ko': 'Korean'\n\
-'ku': 'Kurdish (Kurmanji)'\n\
-'ky': 'Kyrgyz'\n\
-'lo': 'Lao'\n\
-'la': 'Latin'\n\
-'lv': 'Latvian'\n\
-'lt': 'Lithuanian'\n\
-'lb': 'Luxembourgish'\n\
-'mk': 'Macedonian'\n\
-'mg': 'Malagasy'\n\
-'ms': 'Malay'\n\
-'ml': 'Malayalam'\n\
-'mt': 'Maltese'\n\
-'mi': 'Maori'\n\
-'mr': 'Marathi'\n\
-'mn': 'Mongolian'\n\
-'my': 'Myanmar (Burmese)'\n\
-'ne': 'Nepali'\n\
-'no': 'Norwegian'\n\
-'ps': 'Pashto'\n\
-'fa': 'Persian'\n\
-'pl': 'Polish'\n\
-'pt': 'Portuguese'\n\
-'ma': 'Punjabi'\n\
-'ro': 'Romanian'\n\
-'ru': 'Russian'\n\
-'sm': 'Samoan'\n\
-'gd': 'Scots Gaelic'\n\
-'sr': 'Serbian'\n\
-'st': 'Sesotho'\n\
-'sn': 'Shona'\n\
-'sd': 'Sindhi'\n\
-'si': 'Sinhala'\n\
-'sk': 'Slovak'\n\
-'sl': 'Slovenian'\n\
-'so': 'Somali'\n\
-'es': 'Spanish'\n\
-'su': 'Sundanese'\n\
-'sw': 'Swahili'\n\
-'sv': 'Swedish'\n\
-'tg': 'Tajik'\n\
-'ta': 'Tamil'\n\
-'te': 'Telugu'\n\
-'th': 'Thai'\n\
-'tr': 'Turkish'\n\
-'uk': 'Ukrainian'\n\
-'ur': 'Urdu'\n\
-'uz': 'Uzbek'\n\
-'vi': 'Vietnamese'\n\
-'cy': 'Welsh'\n\
-'xh': 'Xhosa'\n\
-'yi': 'Yiddish'\n\
-'yo': 'Yoruba'\n\
-'zu': 'Zulu'")
+	print("Languages: ")
+	with open('languages.json') as data_file:    
+	    data = json.load(data_file)
+	    for lang in langs:
+	    	print(lang+" - "+data[lang])
 
 def start_translator():
-	start = True
-	option = ''
 	print("\nInteractive Python Translator\n")
-	while option == '' or start:
-		print("Actions: ")
+	while True:
+		print("Available Commands: ")
 		print("(1) Translate")
 		print("(2) Quit")
 
-		option = raw_input("\nWhat do you want to do?: ")
-		if str(option) == '2':
-			sys.exit(1)
-		elif str(option) == '1':
+		option = raw_input("\nPlease select a command to perform: ")
+		if str(option) == '1':
 			original_word = raw_input("\nEnter the word(s) that you need to translate: ")
 			if original_word == '':
 				print("You have entered an empty string.\n")
 			else:
 				# While input == list, repeat action
-				sl = 'list'
-				while sl == 'list':
+				while True:
 					sl = raw_input("\nEnter the SOURCE language (Default = auto - Type 'list' to list all the languages): ")
-					if sl == 'list':
+					if sl in langs:
+						break
+					elif sl == 'list':
 						print_langs()
-					elif sl == '':
+						continue
+					else:
 						sl = 'auto'
-					elif sl not in langs:
-						sl = 'auto'
-					print("\nSource Language: "+sl)
-				# While input == list, repeat action
-				tl = 'list'
-				while tl == 'list':
+						break
+				print("\nSource Language: "+sl)
+				while True:
 					tl = raw_input("\nEnter the TARGET language (Type 'list' to list all the languages): ")
-					if tl == 'list':
+					if tl in langs:
+						break
+					elif tl == 'list':
 						print_langs()
-					elif tl == '':
+						continue
+					else:
 						tl = 'en'
-					elif tl not in langs:
-						tl = 'en'
-					print("\nTarget Language: "+tl)
-
+						break
+				print("\nTarget Language: "+tl)
+				# API Request
 				url = requests.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + sl + "&tl=" + tl + "&dt=t&q=" + urllib.quote_plus(original_word))
 				print(" ")
 				# Print the translated word
 				print("Original Word(s) ("+sl+"): "+ original_word + "\nTranslated Word(s) ("+tl+"): " +url.json()[0][0][0].encode('utf-8')+"\n")
+		elif option == '':
+			continue
 		else:
-			print("Invalid choice, quitting...")
+			print("Program is quitting...")
 			sys.exit(1)
 
 if __name__ == "__main__":
