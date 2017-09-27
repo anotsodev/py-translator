@@ -26,7 +26,7 @@ def print_langs():
 	    data = json.load(data_file)
 	    for lang in langs:
 	    	print(lang+" - "+data[lang])
-
+# full of while loops and elifs
 def start_translator():
 	print("\nInteractive Python Translator\n")
 	while True:
@@ -34,45 +34,51 @@ def start_translator():
 		print("(1) Translate")
 		print("(2) Quit")
 
-		option = raw_input("\nPlease select a command to perform: ")
+		option = raw_input("\nPlease select a command to perform (Enter the number of your choice): ")
 		if str(option) == '1':
-			original_word = raw_input("\nEnter the word(s) that you need to translate: ")
-			if original_word == '':
-				print("You have entered an empty string.\n")
-			else:
-				# While input == list, repeat action
-				while True:
-					sl = raw_input("\nEnter the SOURCE language (Default = auto - Type 'list' to list all the languages): ")
-					if sl in langs:
-						break
-					elif sl == 'list':
-						print_langs()
-						continue
-					else:
-						sl = 'auto'
-						break
-				print("\nSource Language: "+sl)
-				while True:
-					tl = raw_input("\nEnter the TARGET language (Type 'list' to list all the languages): ")
-					if tl in langs:
-						break
-					elif tl == 'list':
-						print_langs()
-						continue
-					else:
-						tl = 'en'
-						break
-				print("\nTarget Language: "+tl)
-				# API Request
-				url = requests.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + sl + "&tl=" + tl + "&dt=t&q=" + urllib.quote_plus(original_word))
-				print(" ")
-				# Print the translated word
-				print("Original Word(s) ("+sl+"): "+ original_word + "\nTranslated Word(s) ("+tl+"): " +url.json()[0][0][0].encode('utf-8')+"\n")
+			while True:
+				original_word = raw_input("\nEnter the word(s) that you need to translate: ")
+				if original_word == '':
+					print("\nYou have entered an empty string.\n")
+					continue
+				else:
+					while True:
+						sl = raw_input("\nEnter the SOURCE language (Default = auto - Type 'list' to list all the languages): ")
+						if sl in langs:
+							break
+						elif sl == 'list':
+							print_langs()
+							continue
+						else:
+							sl = 'auto'
+							break
+					print("\nSource Language: "+sl)
+					while True:
+						tl = raw_input("\nEnter the TARGET language (Default = en - Type 'list' to list all the languages): ")
+						if tl in langs:
+							break
+						elif tl == 'list':
+							print_langs()
+							continue
+						else:
+							tl = 'en'
+							break
+					print("\nTarget Language: "+tl)
+					# API Request
+					url = requests.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + sl + "&tl=" + tl + "&dt=t&q=" + urllib.quote_plus(original_word))
+					print(" ")
+					# Print the translated word
+					print("Original Word(s) ("+sl+"): "+ original_word + "\nTranslated Word(s) ("+tl+"): " +url.json()[0][0][0].encode('utf-8')+"\n")
+					break
+		elif str(option) == '2':
+			print("\nProgram is quitting...")
+			sys.exit(1)
 		elif option == '':
 			continue
 		else:
-			print("Program is quitting...")
-			sys.exit(1)
+			print("\nPlease choose a valid command.\n")
+			continue
+			
 
 if __name__ == "__main__":
 	start_translator()
